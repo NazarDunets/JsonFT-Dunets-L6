@@ -2,6 +2,7 @@ package com.example.ftjson
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import java.io.File
 
 data class Person(
     @SerializedName("name")
@@ -36,7 +37,9 @@ fun main(args: Array<String>) {
     val jsonString = gson.toJson(me)
     println(jsonString)
 
-    val meFromJson = gson.fromJson(jsonString, Person::class.java)
+    val jsonFromFile = File("ft.json").bufferedReader()
+            .use { it.readText() }
+    val meFromJson = gson.fromJson(jsonFromFile, Person::class.java)
     println(meFromJson)
 }
 
